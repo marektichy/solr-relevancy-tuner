@@ -70,7 +70,7 @@ export default {
     getSuggestions: async function(query) {
       var result = [];
       const response = await axios.get(
-        "http://tuner/proxy/tuner.php?q=" +
+        "https://tuner.solr.cz/proxy/tuner.php?q=" +
           query +
           "&k0=" +
           this.k0 +
@@ -90,7 +90,7 @@ export default {
     },
     getRecommendations: async function() {
       const response = await axios.get(
-        "http://tuner/proxy/tuner.php?q=" +
+        "https://tuner.solr.cz/proxy/tuner.php?q=" +
           this.chosen +
           "&k0=" +
           this.k0 +
