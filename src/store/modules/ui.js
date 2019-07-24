@@ -1,33 +1,30 @@
-import * as types from '../mutation-types'
+  import * as types from '../mutation-types'
 
-// initial state
-// shape: [{ id, quantity }]
-const state = {
-  sidebarOpen: false
-}
+  // initial state
 
-// getters
-const getters = {
-  sidebarOpen: state => state.sidebarOpen
-}
+  const state = {
 
-// actions
-const actions = {
-  toggleSidebar ({ commit, state }) {
-    commit(types.TOGGLE_SIDEBAR)
   }
-}
 
-// mutations
-const mutations = {
-  [types.TOGGLE_SIDEBAR] (state) {
-    state.sidebarOpen = !state.sidebarOpen
+  // getters
+  const getters = {
+
   }
-}
 
-export default {
-  state,
-  getters,
-  actions,
-  mutations
-}
+  // actions
+  const actions = {
+
+  }
+
+  // mutations
+  const mutations = {
+
+  }
+
+  export default {
+    state,
+    getters,
+    actions,
+    mutations,
+    types
+  }

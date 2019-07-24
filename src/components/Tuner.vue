@@ -4,38 +4,29 @@
       <div class="col-3 order-2" id="sticky-sidebar">
         <div class="sticky-top border-left">
           <div class="knobs-group">
-            <knob-control
-              v-model="k0"
-              :animation="{
-                  animated: true,
-                  animateValue: true
-                }"
-            ></knob-control>"Prodeje"
-            <knob-control
-              v-model="k1"
-              :animation="{
-                  animated: true,
-                  animateValue: true
-                }"
-            ></knob-control>"Dostupnost"
-            <knob-control
-              v-model="k2"
-              :animation="{
-                  animated: true,
-                  animateValue: true
-                }"
-            ></knob-control>"Stáří"
+            <knob-control v-model="k0"></knob-control>"Prodeje"
+            <knob-control v-model="k1"></knob-control>"Dostupnost"
+            <knob-control v-model="k2"></knob-control>"Stáří"
+            <div class="debug border-top">
+              <span v-html="debug"></span>
+            </div>
           </div>
         </div>
       </div>
       <div class="col" id="main">
-        <vue-simple-suggest v-model="chosen" :list="getSuggestions" :filter-by-query="false" :prevent-submit="true">
+        Hledat:
+        <vue-simple-suggest
+          v-model="chosen"
+          :list="getSuggestions"
+          :filter-by-query="false"
+          :prevent-submit="true"
+        >
           <div slot="suggestion-item" slot-scope="{ suggestion }">
             <div v-html="suggestion"></div>
           </div>
         </vue-simple-suggest>
         <span id="spacer"></span>
-
+        <h2>Doporučujeme:</h2>
         <div class="recommended-group">
           <div class="recommended" v-for="rec in recommended" :key="rec.id">
             <div class="pane">
@@ -71,9 +62,6 @@ import "vue-simple-suggest/dist/styles.css"; // Using a css-loader
 
 export default {
   name: "Tuner",
-  props: {
-    msg: String
-  },
   components: {
     KnobControl,
     VueSimpleSuggest
@@ -97,6 +85,7 @@ export default {
         result.push(book.label);
       });
       this.recommended = response.data.recommended;
+      this.debug = response.data.debug;
       return result;
     },
     getRecommendations: async function() {
@@ -113,26 +102,28 @@ export default {
           this.solrFormula
       );
       this.recommended = response.data.recommended;
+      this.debug = response.data.debug;
     },
     clickHandler: function() {
       return false;
     }
   },
   watch: {
-    k0: function(newQuestion, oldQuestion) {
+    k0: function() {
       this.getRecommendations();
     },
-    k1: function(newQuestion, oldQuestion) {
+    k1: function() {
       this.getRecommendations();
     },
-    k2: function(newQuestion, oldQuestion) {
+    k2: function() {
       this.getRecommendations();
-    },
+    }
   },
   data: function() {
     return {
       chosen: "",
       recommended: "",
+      debug: "",
       k0: 10,
       k1: 60,
       k2: 20
@@ -196,6 +187,9 @@ a {
   max-width: 100%;
 }
 
+.debug {
+  padding-top: 20px;
+}
 * {
   box-sizing: border-box;
 }
