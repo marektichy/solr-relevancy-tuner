@@ -1,0 +1,6 @@
+{
+    "require": {
+        "solarium/solarium": "^5.0",
+        "kint-php/kint": "^3.2"
+    }
+}
